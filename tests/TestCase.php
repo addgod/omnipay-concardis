@@ -73,4 +73,18 @@ class TestCase extends GatewayTestCase
         $this->assertSame('payment_Instrument', $response->getTransactionId());
         $this->assertSame(500, $response->getTransactionReference());
     }
+
+    public function testCompleteResponse()
+    {
+        $this->getHttpRequest()->request->replace([
+            'paymentInstrumentId' => '',
+            'transactionId'       => 1,
+        ]);
+        $request = $this->gateway->completePurchase();
+        $this->assertInstanceOf(CompleteRequest::class, $request);
+
+        $response = $request->send();
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame('250525', $response->getTransactionReference());
+    }
 }
