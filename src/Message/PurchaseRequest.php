@@ -8,7 +8,7 @@ class PurchaseRequest extends AbstractRequest
     {
         return [
             'merchantId'      => $this->getMerchantId(),
-            'transactionId'   => $this->getTransactionReference(),
+            'referenceId'     => $this->getTransactionReference(),
             'language'        => $this->getLanguage(),
             'notificationUrl' => $this->getNotifyUrl(),
             'successUrl'      => $this->getReturnUrl(),
